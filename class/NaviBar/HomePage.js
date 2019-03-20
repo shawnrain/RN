@@ -8,13 +8,15 @@ import {
 } from 'react-navigation';
 import WebScreen from './WebScreen';
 export default class HomePage extends Component<Props> {
+
   static navigationOptions = {
     headerTitle: '墨级',
     title:'MOJI',
   };
   _bindPus = () => {
     this.props.navigation.navigate('webSc');
-
+    /* 抽屉导航*/
+    /*this.props.navigation.openDrawer('webSc');*/
   }
   render() {
     return (

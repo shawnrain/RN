@@ -7,18 +7,18 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View,Button} from 'react-native';
 import {
   createStackNavigator,
   createBottomTabNavigator,
   createAppContainer,
   createMaterialTopTabNavigator,
 } from 'react-navigation';
-import HomePage from './HomePage';
-import FindMe from './FindMe';
-import WebScreen from './WebScreen';
+import HomePage from './class/NaviBar/HomePage';
+import FindMe from './class/NaviBar/FindMe';
+import WebScreen from './class/NaviBar/WebScreen';
 
-const CreateTab = createMaterialTopTabNavigator({
+const CreateTab = createBottomTabNavigator({
   Home: {
     screen: HomePage,
     navigationOptions: () => ({
@@ -45,12 +45,21 @@ const CreateTab = createMaterialTopTabNavigator({
     },
   }
 })
+// 设置 title
+CreateTab.navigationOptions = ({navigation}) => {
+  const { routeName } = navigation.state.routes[navigation.state.index];
+  const headerTitle = routeName;
+  return {
+      headerTitle,
+  };
+};
 
 const StacksOverTabs = createStackNavigator(
   {
     Root : CreateTab,
     webSc : WebScreen,
     Home : HomePage,
+    presentL : FindMe,
   },
   {
       initialRouteName:'Root',
@@ -62,6 +71,9 @@ const StacksOverTabs = createStackNavigator(
         headerTitleStyle:{
           fontWeight : 'bold',
         },
+        headerRight:(
+            <Button onPress = {() => alert('HKJKJD')} title = "Btn" color = '#FF0000'/>
+        ),
       }
   },
 );
